@@ -58,6 +58,25 @@
             <div class="col-12">
               <div class="card shadow p-3 mb-4 rounded">
                 <div class="card-body">
+
+                  <!-- Like Button -->
+                  <div class="text-end mb-3">
+                    <p class="text-muted">Total Likes: <strong>{{ template_data.like_count }}</strong></p>
+                    <form method="POST" action="{% url 'movies.like_movie' id=template_data.movie.id %}">
+                      {% csrf_token %}
+                      {% if template_data.user_has_liked %}
+                        <button type="submit" class="btn bg-danger text-white">
+                          👎 Unlike
+                        </button>
+                      {% else %}
+                        <button type="submit" class="btn bg-dark text-white">
+                          👍 Like
+                        </button>
+                      {% endif %}
+                    </form>
+                  </div>
+
+                  <!-- Review Button-->
                   <b class="text-start">Create a review</b><br /><br />
                   <form method="POST" action="{% url 'movies.create_review' id=template_data.movie.id %}">
                     {% csrf_token %}

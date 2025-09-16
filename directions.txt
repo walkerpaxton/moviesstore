@@ -5,3 +5,12 @@
     -do python3 manage.py startapp <appname>
     -add appname into settings.py
     -add to urls.py
+
+-new button/function
+    -go to class it would be into
+    -chat html code
+    -add to models
+    -add to admin
+    -add to show.html
+    -add to views.py
+    -add to urls.py
