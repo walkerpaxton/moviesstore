@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col mx-auto mb-3">
+        <h2>Report Comment</h2>
+        <hr />
+        <form method="POST">
+          {% csrf_token %}
+          <p>
+            <label for="report_reason">Reason for reporting:</label>
+            <select name="report_reason" class="form-control" id="report_reason">
+              <option value="spam">Spam</option>
+              <option value="inappropriate">Inappropriate Content</option>
+              <option value="harassment">Harassment</option>
+              <option value="hate_speech">Hate Speech</option>
+              <option value="false_information">False Information</option>
+              <option value="other">Other</option>
+            </select>
+          </p>
+          <p>
+            <label for="additional_info">Additional Information (Optional):</label>
+            <textarea name="additional_info" class="form-control" id="additional_info" rows="3" placeholder="Please provide any additional details..."></textarea>
+          </p>
+          <div class="text-start">
+            <button type="submit" class="btn bg-danger text-white">
+              Submit Report
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>  
+</div>
+{% endblock content %}

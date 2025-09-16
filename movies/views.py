@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Movie, Review, Like
+from .models import Movie, Review, Like, Report
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -85,3 +85,25 @@ def like_movie(request, id):
         template_data['title'] = 'Like Movie'
         template_data['like_count'] = like_count
         return render(request, 'movies/like_button.html', {'template_data': template_data})
+    
+@login_required
+def report_comment(request, id, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    
+    if request.method == 'GET':
+        template_data = {}
+        template_data['title'] = 'Report Comment'
+        template_data['review'] = review
+        return render(request, 'movies/report_comment.html', {'template_data': template_data})
+    elif request.method == 'POST':
+        report = Report()
+        report.review = review
+        report.user = request.user
+        report.reason = request.POST['report_reason']
+        report.additional_info = request.POST.get('additional_info', '')
+        report.save()
+        # Delete the reported comment
+        review.delete()
+        return redirect('movies.show', id=id)
+    else:
+        return redirect('movies.show', id=id)

@@ -5,11 +5,14 @@
     -do python3 manage.py startapp <appname>
     -add appname into settings.py
     -add to urls.py
+    -follow steps below
+    -add to show.html in whatever the app exists in
+    -add link to base.html
 
 -new button/function
     -go to class it would be into
     -chat html code
-    -add to models
+    -add to models - makemigrations and migrate
     -add to admin
     -add to show.html
     -add to views.py
