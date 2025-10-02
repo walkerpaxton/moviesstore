@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col mx-auto mb-3">
+        <h2>Create Petition</h2>
+        <hr />
+        <form method="POST" action="{% url 'petition.create' %}">
+          {% csrf_token %}
+          <p>
+            <label for="movie_title" class="form-label">Movie title to add</label>
+            <input type="text" name="movie_title" id="movie_title" required class="form-control" />
+          </p>
+          <p>
+            <label for="petition_text" class="form-label">Petition</label>
+            <textarea name="petition_text" id="petition_text" class="form-control" rows="5" placeholder="Explain why this movie should be added" required></textarea>
+          </p>
+          <div class="text-start">
+            <button type="submit" class="btn bg-dark text-white">Submit Petition</button>
+          </div>
+        </form>
+
+        <hr />
+        <h4 class="mt-4">Existing Petitions</h4>
+        <ul class="list-group mt-2">
+          {% for p in petitions %}
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <b>{{ p.movie_title }}</b>
+                <div class="text-muted small">by {{ p.user.username }} • {{ p.created_at }}</div>
+                <div class="mt-1">{{ p.petition_text }}</div>
+              </div>
+              <div class="text-end">
+                <div class="mb-1">Votes: <strong>{{ p.votes }}</strong></div>
+                <form method="POST" action="{% url 'petition.vote' id=p.id %}">
+                  {% csrf_token %}
+                  {% if user_voted_ids and p.id in user_voted_ids %}
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Unvote</button>
+                  {% else %}
+                    <button type="submit" class="btn btn-sm btn-outline-primary">▲ Upvote</button>
+                  {% endif %}
+                </form>
+              </div>
+            </div>
+          </li>
+          {% empty %}
+          <li class="list-group-item">No petitions yet.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+

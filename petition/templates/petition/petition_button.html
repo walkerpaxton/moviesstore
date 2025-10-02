@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col mx-auto mb-3">
+        <div class="text-end mb-3">
+          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#petitionCollapse" aria-expanded="false" aria-controls="petitionCollapse">
+            + Create Petition
+          </button>
+        </div>
+
+        <div class="collapse" id="petitionCollapse">
+          <div class="card card-body">
+            <form method="POST" action="{% url 'petition.create' %}">
+              {% csrf_token %}
+              <p>
+                <label for="movie_title" class="form-label">Movie title to add</label>
+                <input type="text" name="movie_title" id="movie_title" required class="form-control" />
+              </p>
+              <p>
+                <label for="petition_text" class="form-label">Petition</label>
+                <textarea name="petition_text" id="petition_text" class="form-control" rows="4" placeholder="Explain why this movie should be added" required></textarea>
+              </p>
+              <div class="text-start">
+                <button type="submit" class="btn bg-dark text-white">Submit Petition</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+
