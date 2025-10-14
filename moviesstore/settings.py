@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "accounts",
     "cart",
     "petition",
+    "admin_stats.apps.AdminStatsConfig",
 ]
 
 MIDDLEWARE = [

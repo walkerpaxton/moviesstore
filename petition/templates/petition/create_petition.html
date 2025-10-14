@@ -36,11 +36,7 @@
                 <div class="mb-1">Votes: <strong>{{ p.votes }}</strong></div>
                 <form method="POST" action="{% url 'petition.vote' id=p.id %}">
                   {% csrf_token %}
-                  {% if user_voted_ids and p.id in user_voted_ids %}
-                    <button type="submit" class="btn btn-sm btn-outline-danger">Unvote</button>
-                  {% else %}
-                    <button type="submit" class="btn btn-sm btn-outline-primary">▲ Upvote</button>
-                  {% endif %}
+                  <button type="submit" class="btn btn-sm btn-outline-primary">▲ Upvote</button>
                 </form>
               </div>
             </div>
